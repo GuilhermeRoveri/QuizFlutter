@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quizflutter/fimquiz.dart';
+import 'package:quizflutter/home_page.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -22,12 +24,17 @@ class _QuizState extends State<Quiz> {
     {
       'question':
           'Qual animal marinho é famoso por sua carapaça dura e longa vida?',
-      'answers': ['Baleia Azul', 'Caranguejo', 'Tartaruga Marinha', 'Estrela do Mar'],
+      'answers': [
+        'Baleia Azul',
+        'Caranguejo',
+        'Tartaruga Marinha',
+        'Estrela do Mar'
+      ],
       'correctAnswer': 'Tartaruga Marinha'
     },
     {
       'question':
-        'Qual desses mamíferos marinhos é considerado o maior animal do planeta?',
+          'Qual desses mamíferos marinhos é considerado o maior animal do planeta?',
       'answers': ['Golfinho', 'Orca', 'Baleia Azul', 'Tubarão-baleia'],
       'correctAnswer': 'Baleia Azul'
     }
@@ -42,7 +49,7 @@ class _QuizState extends State<Quiz> {
         currentQuestionIndex++;
       });
     } else {
-      //Fim
+      //      Navigator.of(context).push(MaterialPageRoute(builder: (_) =>HomePage()));
     }
   }
 
@@ -59,7 +66,7 @@ class _QuizState extends State<Quiz> {
         if (currentQuestionIndex < questions.length - 1) {
           currentQuestionIndex++;
         } else {
-          //Fim do quiz, fazer algo aqui
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => FimQuiz()));
         }
       });
     });
@@ -80,9 +87,10 @@ class _QuizState extends State<Quiz> {
             width: double.infinity,
             height: 400,
             child: Center(
-              child: Text(currentQuestion['question'],
-                  style:
-                      GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18),
+              child: Text(
+                currentQuestion['question'],
+                style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
           ),
@@ -93,7 +101,8 @@ class _QuizState extends State<Quiz> {
               if (isSelected) {
                 buttonColor = isCorrect! ? Colors.green : Colors.red;
               }
-              return meuBtn(resposta, () => handleAnswer(resposta), buttonColor);
+              return meuBtn(
+                  resposta, () => handleAnswer(resposta), buttonColor);
             }).toList(),
           ),
         ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quizflutter/fimquiz.dart';
+import 'package:quizflutter/home_page.dart';
 
 class QuizTerrestre extends StatefulWidget {
   const QuizTerrestre({super.key});
@@ -27,11 +29,10 @@ class _QuizState extends State<QuizTerrestre> {
     },
     {
       'question':
-        'Qual destes animais terrestres é um marsupial e é encontrado principalmente na Austrália?',
+          'Qual destes animais terrestres é um marsupial e é encontrado principalmente na Austrália?',
       'answers': ['Leão', 'Canguru', 'Lobo', 'Tigre'],
       'correctAnswer': 'Canguru'
-    }
-    //More questions
+    } //More questions
   ];
 
   void nextQuestion() {
@@ -42,7 +43,6 @@ class _QuizState extends State<QuizTerrestre> {
         currentQuestionIndex++;
       });
     } else {
-      //Fim
     }
   }
 
@@ -59,7 +59,7 @@ class _QuizState extends State<QuizTerrestre> {
         if (currentQuestionIndex < questions.length - 1) {
           currentQuestionIndex++;
         } else {
-          //Fim do quiz, fazer algo aqui
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => FimQuiz()));
         }
       });
     });
@@ -80,9 +80,10 @@ class _QuizState extends State<QuizTerrestre> {
             width: double.infinity,
             height: 400,
             child: Center(
-              child: Text(currentQuestion['question'],
-                  style:
-                      GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18),
+              child: Text(
+                currentQuestion['question'],
+                style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
           ),
@@ -93,7 +94,8 @@ class _QuizState extends State<QuizTerrestre> {
               if (isSelected) {
                 buttonColor = isCorrect! ? Colors.green : Colors.red;
               }
-              return meuBtn(resposta, () => handleAnswer(resposta), buttonColor);
+              return meuBtn(
+                  resposta, () => handleAnswer(resposta), buttonColor);
             }).toList(),
           ),
         ],
